@@ -1,19 +1,19 @@
-# 🧾 Sistema de Negociação de Ativos
-**Video Projeto Rodando** : https://drive.google.com/file/d/1K3fkBF4rF2gVY9Iq74HIibx0Nbuoiu1v/view?usp=sharing
+# 🧾 Asset Trading System
+**Project Demo Video:** : https://drive.google.com/file/d/1K3fkBF4rF2gVY9Iq74HIibx0Nbuoiu1v/view?usp=sharing
 
-## 📌 Descrição
+## 📌 Description
 
-Este projeto é um sistema de negociação de ativos com arquitetura distribuída. Ele simula a submissão e o processamento de ordens de compra e venda, realiza o casamento de ordens e salva os negócios realizados em um banco de dados SQL Server.
+This project is an asset trading system built with a distributed architecture. It simulates order submission and processing for buy and sell orders, performs order matching, and stores executed trades in a SQL Server database.
 
-### A solução é composta por:
+##The solution is composed of the following components:
 
-- **OrderAPI** – API para envio e consulta de ordens.  
-- **OrderProcessor** – Serviço que consome mensagens do RabbitMQ, realiza o casamento de ordens e salva no banco.  
-- **OrderUI** – Interface em Windows Forms para visualização de ordens e negócios.  
-- **OrderCommonModels** – Biblioteca com modelos de dados compartilhados.  
-- **OrdemApi.Tests** – Projeto de testes unitários com XUnit e Moq.
+-OrderAPI – API responsible for submitting and retrieving orders.
+-OrderProcessor – Service that consumes messages from RabbitMQ, performs order matching, and saves the results to the database.
+-OrderUI – Windows Forms interface for viewing orders and executed trades.
+-OrderCommonModels – Library containing shared data models.
+-OrderApi.Tests – Unit test project using XUnit and Moq.
 
-## ⚙️ Tecnologias utilizadas
+## ⚙️ Technologies Used
 
 - .NET 6 / .NET 8  
 - C#  
@@ -24,22 +24,22 @@ Este projeto é um sistema de negociação de ativos com arquitetura distribuíd
 - XUnit + Moq  
 
 
-## 🚀 Como executar o projeto
+## 🚀 How to Run the Project
 
-### 1. Clone o repositório
+### 1. Clone the repository
 
 bash
 git clone https://github.com/goncalvesliv/SistemaDeNegociacao.git
 cd SistemaDeNegociacao
 
-### 2. Configure a string de conexão com o banco
-No projeto OrderAPI e OrderProcessor, edite o arquivo appsettings.json com a sua string de conexão:
+### 2. Configure the database connection string
+In the OrderAPI and OrderProcessor projects, edit the appsettings.json file with your connection string:
 
 "ConnectionStrings": {
   "NegociacoesDb": "Server=SEU_SERVIDOR;Database=NomeBanco;User Id=SEU_USUARIO;Password=SENHA;"
 }
 
-e depois crie duas tabelas no SqlServer 
+Then create the two required tables in SQL Server:
 
 CREATE TABLE Negocios (
     Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -57,20 +57,20 @@ CREATE TABLE OrdemProcessada (
     Status NVARCHAR(30) NOT NULL,
 );
 
-### 3. Como executar o RabbitMQ com Docker
-Para que a API publique e o processor consuma as ordens, é necessário que o RabbitMQ esteja rodando.
+### 3. Run RabbitMQ with Docker
+To allow the API to publish orders and the processor to consume them, RabbitMQ must be running.
 
-Passos:
-Certifique-se de ter o Docker instalado.
-Utilize o arquivo docker-compose.yml que está na raiz do projeto
-Execute o comando : docker-compose up -d
+Steps:
+Ensure Docker is installed.
+Use the docker-compose.yml file located in the project root.
+Run: docker-compose up -d
 
-Acesse a interface web
-URL: http://localhost:15672
-Usuário: guest
-Senha: guest
+Access the management interface:
+URL: http://localhost:
+User: guest
+Password: guest
 
-### 4. Execute os projetos
+### 4. Run the Projects
 OrderAPI - dotnet run
-OrderProcessor (precisa do RabbitMQ rodando) - dotnet run
-E rode a interface OrderUI 
+OrderProcessor (requires RabbitMQ running)) - dotnet run
+Then run the OrderUI interface.
